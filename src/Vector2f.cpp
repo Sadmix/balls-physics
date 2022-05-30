@@ -60,7 +60,7 @@ double Vector2f::getAngleR()
     double x2 = 1;
     double y2 = 0;
     double scalarMult = x2 * y2 + x * y;
-    double angleR = acos((x * x2 + y * y2)/(getModule()*sqrt(pow(x2, 2)))); 
+    double angleR = acos((scalarMult)/(getModule()*sqrt(pow(x2, 2)))); 
     return angleR;
 }
 
