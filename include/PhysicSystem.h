@@ -5,7 +5,7 @@
 //  Author      : Sanchous
 //-----------------------------------------------------------------------
 #include <iostream>
-#include <ecs.h>
+#include <ecs/EntityManager.h>
 
 #ifndef PHYSICSYSTEM_H
 #define PHYSICSYSTEM_H
@@ -14,7 +14,7 @@ class PhysicSystem{
 public:
     void update();
 private:
-    entityManager &EntityManager;
+    ecs::EntityManager& entityManager;
 };
 
 #endif
