@@ -38,7 +38,7 @@ void Vector2f::setModule(float module)
         y = module;
     }
     else if (y == 0){
-        x = module
+        x = module;
     }
     else{
         float moduleDiff = module/currentModule;
