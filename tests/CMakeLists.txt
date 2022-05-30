@@ -1,9 +1,9 @@
 find_package(Gtest REQUIRED)
 
 
-set(BINARY ${PROJECT_NAME}_tst)
+set(BINARY Test)
 
-file(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES false *.h *.cpp)
+file(GLOB_RECURSE TEST_SOURCES LIST_DIRECTORIES true *.h *.cpp)
 
 set(SOURCES ${TEST_SOURCES})
 
