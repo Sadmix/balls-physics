@@ -6,78 +6,82 @@
 //-----------------------------------------------------------------------
 #include "Vector2f.h"
 
-using namespace std;
-
-Vector2f::Vector2f(float x, float y) : x(x), y(y)
+Vector2f::Vector2f(double x, double y) : x(x), y(y)
 {
 
 }
 
-void Vector2f::setAngleR(float radians) 
+void Vector2f::rotateR(double radians) 
 {
-    float rotx = x * cos(radians) - y * sin(radians);
-    float roty = x * sin(radians) + y * cos(radians);
+    double rotx = x * cos(radians) - y * sin(radians);
+    double roty = x * sin(radians) + y * cos(radians);
     x = rotx;
     y = roty;
 }
 
-void Vector2f::setAngleD(float degrees) 
+void Vector2f::rotateD(double degrees) 
 {                                       
-    float radians = degrees * PI / 180;
-    float rotx = x * cos(radians) - y * sin(radians);
-    float roty = x * sin(radians) + y * cos(radians);
+    double radians = degrees * M_PI / 180.0;
+    double rotx = x * cos(radians) - y * sin(radians);
+    double roty = x * sin(radians) + y * cos(radians);
     x = rotx;
     y = roty;
 }
 
-void Vector2f::setModule(float module) 
+void Vector2f::setModule(double module) 
 {
-    float currentModule = sqrt(pow(x, 2) + pow(y, 2));
-    float moduleDiff = module/currentModule;
+    double currentModule = sqrt(pow(x, 2) + pow(y, 2));
+    
     if (x == 0){
-        y = module;
+        y = module*pow(-1, signbit(y));
     }
     else if (y == 0){
-        x = module;
+        x = module*pow(-1, signbit(x));
     }
     else{
-        float moduleDiff = module/currentModule;
-        x = x*moduleDiff;
-        y = y*moduleDiff;
+        double moduleDiff = module/currentModule;
+        x = x*moduleDiff*pow(-1, signbit(x));
+        y = y*moduleDiff*pow(-1, signbit(y));
     }
 }
 
-void Vector2f::setX(float x)
+void Vector2f::setX(double x)
 {
     this->x = x;
 }
 
-void Vector2f::setY(float y)
+void Vector2f::setY(double y)
 {
     this->y = y;
 }
 
-float Vector2f::getAngleR()
+double Vector2f::getAngleR()
 {
-    return 0;
+    double x2 = 1;
+    double y2 = 0;
+    double scalarMult = x2 * y2 + x * y;
+    double angleR = acos((x * x2 + y * y2)/(getModule()*sqrt(pow(x1, 2)))); 
+    return angleR;
 }
 
-float Vector2f::getAngelD()
+double Vector2f::getAngelD()
 {
-    return 0;
+    double angleD = getAngleR();
+    double angleR = angleD * M_PI / 180.0;
+    return angleR;
 }
 
-float Vector2f::getModule()
+double Vector2f::getModule()
 {
-    return 0;
+    return sqrt(pow(x, 2) + pow(y, 2));
 }
 
-float Vector2f::getX()
+double Vector2f::getX()
 {
     return x;
 }
 
-float Vector2f::getY()
+double Vector2f::getY()
 {
     return y;
 }
