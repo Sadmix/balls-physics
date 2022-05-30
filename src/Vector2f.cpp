@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------
 //  Source      : Vector2f.cpp
 //  Created     : 25.05.2022
-//  Modified    : 25.05.2022
+//  Modified    : 30.05.2022
 //  Author      : Sanchous
 //-----------------------------------------------------------------------
 #include "Vector2f.h"
@@ -60,7 +60,7 @@ double Vector2f::getAngleR()
     double x2 = 1;
     double y2 = 0;
     double scalarMult = x2 * y2 + x * y;
-    double angleR = acos((x * x2 + y * y2)/(getModule()*sqrt(pow(x1, 2)))); 
+    double angleR = acos((x * x2 + y * y2)/(getModule()*sqrt(pow(x2, 2)))); 
     return angleR;
 }
 
