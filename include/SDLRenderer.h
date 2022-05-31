@@ -3,31 +3,26 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <string>
 #include <list>
 
 #include "Exceptions.h"
+#include "Renderer.h"
 #include "Shapes.h"
+#include <ecs/ComponentContainer.h>
 
 #undef main
 
-class SDLRenderer
+class SDLRenderer : public Renderer
 {
 private:
   SDL_Window *window = NULL;
   SDL_Renderer *renderer = NULL;
   SDL_Texture *gTexture = NULL;
 
-  int screenWidth, screenHeight;
-  std::string winTitle;
-
 public:
   SDLRenderer(std::string winTitle, int screenWidth, int screenHeight);
-  void Init();
-  void Draw(std::list<Shape *> shapes);
-
-private:
-  SDL_Texture *loadTexture(std::string path);
+  void Init() override;
+  void Draw(std::list<std::pair<Texture*, Position*>> textures) override;
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "SDLRenderer.h"
+#include "SDLShapeTexture.h"
 
-void SDL_RenderDrawCircle(SDL_Renderer *renderer, Circle *c)
+void SDL_RenderDrawCircle(SDL_Renderer *renderer, Circle *c, double xPos, double yPos)
 {
   const int diameter = c->getRadius() * 2;
   int x = c->getRadius() - 1;
@@ -9,8 +10,8 @@ void SDL_RenderDrawCircle(SDL_Renderer *renderer, Circle *c)
   int ty = 1;
   int error = tx - diameter;
 
-  int centreX = c->getX();
-  int centreY = c->getY();
+  int centreX = xPos;
+  int centreY = yPos;
 
   while (x >= y)
   {
@@ -39,7 +40,7 @@ void SDL_RenderDrawCircle(SDL_Renderer *renderer, Circle *c)
   }
 }
 
-SDLRenderer::SDLRenderer(std::string winTitle, int screenWidth, int screenHeight) : winTitle(winTitle), screenWidth(screenWidth), screenHeight(screenHeight)
+SDLRenderer::SDLRenderer(std::string winTitle, int screenWidth, int screenHeight) : Renderer(winTitle, screenWidth, screenHeight)
 {
 }
 
@@ -81,7 +82,7 @@ void SDLRenderer::Init()
   }
 }
 
-void SDLRenderer::Draw(std::list<Shape *> shapes)
+void SDLRenderer::Draw(std::list<std::pair<Texture*, Position*>> objects)
 {
   SDL_Rect fillRect = {screenWidth / 4, screenHeight / 4, screenWidth / 2, screenHeight / 2};
 
@@ -90,40 +91,21 @@ void SDLRenderer::Draw(std::list<Shape *> shapes)
   SDL_RenderClear(renderer);
   SDL_SetRenderDrawColor(renderer, 0x0, 0x0, 0x0, 0xFF);
 
-  for (auto shape : shapes)
+  for (auto object : objects)
   {
-    auto circleShape = dynamic_cast<Circle *>(shape);
-    auto rectShape = dynamic_cast<Rect *>(shape);
+    auto texture = dynamic_cast<SDLShapeTexture*>(object.first);
+    auto position = object.second; 
+    auto circleShape = dynamic_cast<Circle *>(texture->shape);
+    auto rectShape = dynamic_cast<Rect *>(texture->shape);
     if (circleShape)
     {
-      SDL_RenderDrawCircle(renderer, circleShape);
+      SDL_RenderDrawCircle(renderer, circleShape, position->x, position->y);
     }
     if (rectShape)
     {
-      SDL_Rect rect = {rectShape->getX(), rectShape->getY(), rectShape->getW(), rectShape->getH()};
+      SDL_Rect rect = {position->x, position->y, rectShape->getW(), rectShape->getH()};
       SDL_RenderDrawRect(renderer, &rect);
     }
   }
   SDL_RenderPresent(renderer);
-}
-
-SDL_Texture *SDLRenderer::loadTexture(std::string path)
-{
-  SDL_Texture *newTexture = NULL;
-
-  SDL_Surface *loadedSurface = IMG_Load(path.c_str());
-  if (loadedSurface == NULL)
-  {
-    throw SDLIMGLoadException();
-  }
-  else
-  {
-    newTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
-    if (newTexture == NULL)
-    {
-      throw SDLCreateTexturException();
-    }
-    SDL_FreeSurface(loadedSurface);
-  }
-  return newTexture;
 }
