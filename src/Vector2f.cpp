@@ -4,6 +4,7 @@
 //  Modified    : 30.05.2022
 //  Author      : Sanchous
 //-----------------------------------------------------------------------
+
 #include "Vector2f.h"
 
 Vector2f::Vector2f(double x, double y) : x(x), y(y)

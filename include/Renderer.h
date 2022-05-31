@@ -1,12 +1,18 @@
-#include <string>
-#include <list>
-#include <vector>
-
-#include "Position.h"
-#include "Texture.h"
+//-----------------------------------------------------------------------
+//  Source      : Renderer.h
+//  Created     : 31.05.2022
+//  Modified    : 31.05.2022
+//  Author      : Dmitry Safronov 
+//-----------------------------------------------------------------------
 
 #ifndef __RENDERER__
 #define __RENDERER__
+
+#include <string>
+#include <list>
+
+#include "Position.h"
+#include "Texture.h"
 
 class Renderer
 {

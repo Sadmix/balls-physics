@@ -5,13 +5,14 @@
 //  Author      : Sanchous
 //  Description : Работаем с координатами
 //-----------------------------------------------------------------------
+
+#ifndef VECTOR2F_H
+#define VECTOR2F_H
+
 #include <iostream>
 #include <math.h>
 #define _USE_MATH_DEFINES
 #define M_PI 3.14159265358979323846
-
-#ifndef VECTOR2F_H
-#define VECTOR2F_H
 
 class Vector2f{
 public:

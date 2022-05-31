@@ -1,3 +1,10 @@
+//-----------------------------------------------------------------------
+//  Source      : SDLRenderer.cpp
+//  Created     : 31.05.2022
+//  Modified    : 31.05.2022
+//  Author      : Dmitry Safronov 
+//-----------------------------------------------------------------------
+
 #include "SDLRenderer.h"
 #include "SDLShapeTexture.h"
 
