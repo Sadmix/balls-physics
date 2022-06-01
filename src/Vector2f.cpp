@@ -58,18 +58,26 @@ void Vector2f::setY(double y)
 
 double Vector2f::getAngleR()
 {
+    if (y == 0)
+    {
+        return 0;
+    }
     double x2 = 1;
     double y2 = 0;
-    double scalarMult = x2 * y2 + x * y;
+    double scalarMult = x2 * x + y2 * y;
     double angleR = acos((scalarMult)/(getModule()*sqrt(pow(x2, 2)))); 
     return angleR;
 }
 
 double Vector2f::getAngelD()
 {
-    double angleD = getAngleR();
-    double angleR = angleD * M_PI / 180.0;
-    return angleR;
+    if (y == 0)
+    {
+        return 0;
+    } 
+    double angleR = getAngleR();
+    double angleD = angleR * M_PI / 180.0;
+    return floor(angleD * 10 + 0.5) / 10;
 }
 
 double Vector2f::getModule()

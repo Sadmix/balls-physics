@@ -13,8 +13,12 @@
 
 class PhysicSystem{
 public:
-    void update();
+    //PhysicSystem(EntityManager& entityManager);
+    void update(double dt);
 private:
+    void move(double dt);
+    void detectCollision();
+    void collide();
     ecs::EntityManager& entityManager;
 };
 
