@@ -8,38 +8,30 @@
 #ifndef __SHAPES__
 #define __SHAPES__
 
-class Shape
+class SDLShape
 {
 public:
-  virtual ~Shape() = default;
+  virtual ~SDLShape() = default;
 };
 
-class Circle : public Shape
+class SDLShapeCircle : public SDLShape
 {
 private:
-  int x;
-  int y;
   int radius;
 
 public:
-  Circle(int x, int y, int radius) : x(x), y(y), radius(radius) { }
-  int getX() { return x; }
-  int getY() { return y; }
+  SDLShapeCircle(int radius) : radius(radius) { }
   int getRadius() { return radius; }
 };
 
-class Rect : public Shape
+class SDLShapeRect : public SDLShape
 {
 private:
-  int x;
-  int y;
   int w;
   int h;
 
 public:
-  Rect(int x, int y, int w, int h) : x(x), y(y), w(w), h(h) {}
-  int getX() { return x; }
-  int getY() { return y; }
+  SDLShapeRect(int w, int h) : w(w), h(h) {}
   int getW() { return w; }
   int getH() { return h; }
 };

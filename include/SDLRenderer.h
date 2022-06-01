@@ -13,7 +13,7 @@
 #include <list>
 
 #include "Exceptions.h"
-#include "Shapes.h"
+#include "SDLShapes.h"
 #include "BaseRenderer.h"
 
 #undef main
@@ -82,22 +82,23 @@ public:
     for (auto object : objects)
     {
       auto [texture, position] = object;
-      auto circleShape = dynamic_cast<Circle *>(texture->shape);
-      auto rectShape = dynamic_cast<Rect *>(texture->shape);
+      auto circleShape = dynamic_cast<SDLShapeCircle *>(texture->shape);
+      auto rectShape = dynamic_cast<SDLShapeRect *>(texture->shape);
       if (circleShape)
       {
         SDL_RenderDrawCircle(renderer, circleShape, position->x, position->y);
       }
       if (rectShape)
       {
-        SDL_Rect rect = {position->x, position->y, rectShape->getW(), rectShape->getH()};
+        SDL_Rect rect = {position->x - rectShape->getW()/2, position->y - rectShape->getH()/2, rectShape->getW(), rectShape->getH()};
         SDL_RenderDrawRect(renderer, &rect);
       }
     }
     SDL_RenderPresent(renderer);
   }
 
-  void SDL_RenderDrawCircle(SDL_Renderer *renderer, Circle *c, double xPos, double yPos)
+private:
+  void SDL_RenderDrawCircle(SDL_Renderer *renderer, SDLShapeCircle *c, double xPos, double yPos)
   {
     const int diameter = c->getRadius() * 2;
     int x = c->getRadius() - 1;
