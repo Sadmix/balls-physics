@@ -106,6 +106,7 @@ TEST(Vector2f, getAngleD)
     if(a.first == 360)
       break;
     auto coords = a.second;
+
     Vector2f uut(coords[0], coords[1]);
     ASSERT_NEAR(a.first, uut.getAngelD(), VECTOR_EPSILON);
   }

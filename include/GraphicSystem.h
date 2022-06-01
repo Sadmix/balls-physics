@@ -43,9 +43,9 @@ public:
     for (auto [entity, components] : entityManager->getEntitySet<Texture, Position>())
     {
       auto [texture, position] = components;
-      objects.push_back(std::pair(&texture, &position));
-      rend->self.Draw(objects);
+      objects.push_back(std::tuple<Texture* , Position*>(&texture, &position));
     }
+    rend->self.Draw(objects);
   }
 };
 
