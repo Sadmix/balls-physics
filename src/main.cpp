@@ -1,17 +1,28 @@
 #include "GraphicSystem.h"
 #include "SDLShapeTexture.h"
 #include "SDLRenderer.h"
+#include "InputCLI.h"
 #include <iostream>
 
 int main(int argc, char *argv[])
 {
   auto eManager = ecs::EntityManager();
-  auto entity = eManager.createEntity();
-  eManager.addComponent<Position>(entity, 100, 100);
-  eManager.addComponent<Texture>(entity, SDLShapeTexture(new Rect(0, 0 ,200, 200)));
-  Renderer *rend = new SDLRenderer("Test", 800, 600);
-  GraphicSystem gSys(eManager, rend);
-  gSys.update();
-  SDL_Delay(2000);
+  auto adapter = InputAdapter(eManager);
+  InputCLI in(adapter);
+  while(!in.parse()) {}
+  auto gSys = GraphicSystem<SDLRenderer<SDLShapeTexture>, SDLShapeTexture>(eManager, "Test", 800, 600);
+  SDL_Event event;
+  auto exit = false;
+  while(!exit)
+  {
+    while(SDL_PollEvent(&event) > 0)
+    {
+      if(event.type == SDL_QUIT)
+      {
+        exit = true;
+      }
+    }
+    gSys.update();
+  }
   return 0;
 }

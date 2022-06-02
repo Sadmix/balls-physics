@@ -8,14 +8,14 @@
 #ifndef __SDL_SHAPE_TEXTURE__
 #define __SDL_SHAPE_TEXTURE__
 
-#include "Texture.h"
-#include "Shapes.h"
+#include <ecs/Component.h>
+#include "SDLShapes.h"
 
-class SDLShapeTexture : public Texture
+class SDLShapeTexture : public ecs::Component<SDLShapeTexture>
 {
 public:
-  Shape* shape;
-  SDLShapeTexture(Shape* shape) : shape(shape) {};
+  SDLShape* shape;
+  SDLShapeTexture(SDLShape* shape) : shape(shape) {};
 };
 
 #endif

@@ -7,7 +7,32 @@
 
 #include "PhysicSystem.h"
 
-void PhysicSystem::update()
+/*PhysicSystem::PhysicSystem(EntityManager& entityManager) : mEntityManager(entityManager)
+{
+
+}
+*/
+void PhysicSystem::update(double dt)
 {
     // return 0;
+}
+
+/*void PhysicSystem::move(double dt)
+{
+    for (auto [entity, components] : mEntityManager.getEntitySet<Position, Velocity>())
+        {
+            auto [position, velocity] = components;
+            position.x += velocity.x * dt;
+            position.y += velocity.y * dt;
+        }
+}
+*/
+void PhysicSystem::detectCollision()
+{
+
+}
+
+void PhysicSystem::collide()
+{
+
 }
