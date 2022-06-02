@@ -6,6 +6,8 @@
 #include "SDLShapes.h"
 #include "SDLShapeTexture.h"
 #include "Position.h"
+#include "Velocity.h"
+#include "CollisionBox.h"
 
 class InputAdapter
 {

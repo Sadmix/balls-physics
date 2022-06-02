@@ -13,7 +13,9 @@
 
 class Velocity : public ecs::Component<Velocity>
 {
-  Vector2f velocity;
+public:
+  Vector2f self;
+  Velocity(double x, double y) : self(x, y) {};
 };
 
 #endif
